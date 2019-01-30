@@ -6,7 +6,7 @@ steps:
   - --ciphertext-file=id_rsa.enc
   - --plaintext-file=/root/.ssh/id_rsa
   - --location=global
-  - --keyring=my-keyring
+  - --keyring=github-keyring
   - --key=github-key
   volumes:
   - name: 'ssh'
@@ -33,14 +33,33 @@ steps:
   args:
   - clone
   - git@github.com:grevian/SCCCompanion
-  dir: '/workspace'
   volumes:
   - name: 'ssh'
     path: /root/.ssh
 
+# Decrypt the android signing keystore and properties
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+  - kms
+  - decrypt
+  - --ciphertext-file=android/keystore.properties.enc
+  - --plaintext-file=android/keystore.properties
+  - --location=global
+  - --keyring=github-keyring
+  - --key=android-key
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+  - kms
+  - decrypt
+  - --ciphertext-file=android/key.jks.enc
+  - --plaintext-file=android/key.jks
+  - --location=global
+  - --keyring=github-keyring
+  - --key=android-key
+
 - name: 'gcr.io/$PROJECT_ID/flutter'
-  entrypoint: '/bin/bash'
-  args: ['build.sh']
+  args: ['build', 'apk']
 
 - name: 'gcr.io/cloud-builders/gsutil'
-  args: ['cp', '/workspace/flutter_scc_app/build/app/outputs/apk/release/app-release.apk', 'gs://scc-build-output/scc_companion_app_$BUILD_ID.apk']
+  args: ['cp', 'build/app/outputs/apk/release/app-release.apk', 'gs://scc-build-output/scc_companion_app_$BUILD_ID.apk']
