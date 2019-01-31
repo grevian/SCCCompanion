@@ -19,14 +19,6 @@ class RiderTypeSelection extends StatelessWidget {
             new RaisedButton.icon(icon: new Icon(Icons.people), onPressed: () {
               Navigator.of(context).pushNamed("/rider");
             }, label: const Text("I am a Rider")),
-            new RaisedButton.icon(icon: new Icon(Icons.new_releases), onPressed: async () {
-              if (await canLaunch(JoinOurClubURL)) {
-                await launch(JoinOurClubURL);
-              } else {
-                throw 'Could not launch $JoinOurClubURL';
-              }
-            }, label: const Text("I am not a club member")),
-
           ],
         ),
       ),

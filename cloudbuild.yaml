@@ -1,42 +1,4 @@
 steps:
-- name: 'gcr.io/cloud-builders/gcloud'
-  args:
-  - kms
-  - decrypt
-  - --ciphertext-file=id_rsa.enc
-  - --plaintext-file=/root/.ssh/id_rsa
-  - --location=global
-  - --keyring=github-keyring
-  - --key=github-key
-  volumes:
-  - name: 'ssh'
-    path: /root/.ssh
-
-# Set up git with key and domain.
-- name: 'gcr.io/cloud-builders/git'
-  entrypoint: 'bash'
-  args:
-  - '-c'
-  - |
-    chmod 600 /root/.ssh/id_rsa
-    cat <<EOF >/root/.ssh/config
-    Hostname github.com
-    IdentityFile /root/.ssh/id_rsa
-    EOF
-    mv known_hosts /root/.ssh/known_hosts
-  volumes:
-  - name: 'ssh'
-    path: /root/.ssh
-
-# Use git clone.
-- name: 'gcr.io/cloud-builders/git'
-  args:
-  - clone
-  - git@github.com:grevian/SCCCompanion
-  volumes:
-  - name: 'ssh'
-    path: /root/.ssh
-
 # Decrypt the android signing keystore and properties
 - name: 'gcr.io/cloud-builders/gcloud'
   args:
@@ -58,8 +20,10 @@ steps:
   - --keyring=github-keyring
   - --key=android-key
 
+# Make a release build of the APK
 - name: 'gcr.io/$PROJECT_ID/flutter'
   args: ['build', 'apk']
 
+# Ship the built APK to a cloud storage bucket
 - name: 'gcr.io/cloud-builders/gsutil'
   args: ['cp', 'build/app/outputs/apk/release/app-release.apk', 'gs://scc-build-output/scc_companion_app_$BUILD_ID.apk']
