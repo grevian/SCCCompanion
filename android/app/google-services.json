@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "658505570791",
+    "firebase_url": "https://scc-companion-app.firebaseio.com",
+    "project_id": "scc-companion-app",
+    "storage_bucket": "scc-companion-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:658505570791:android:c4f5603affd1d15d",
+        "android_client_info": {
+          "package_name": "ca.saultcyclingclug.fluttersccapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "658505570791-bkhngauj98av1v7qi8qbvmhscuvfs800.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ca.saultcyclingclug.fluttersccapp",
+            "certificate_hash": "7193ea0953a43d381a5eda383ae0a96029939469"
+          }
+        },
+        {
+          "client_id": "658505570791-f5vmbb80c58rvssa6sqgrsrado6eeups.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeTfdP1H9ASvelCDbN64vIz8eAB33Qp20"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "658505570791-f5vmbb80c58rvssa6sqgrsrado6eeups.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
