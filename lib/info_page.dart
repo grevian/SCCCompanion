@@ -1,7 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:package_info/package_info.dart';
 
-class InfoPage extends StatelessWidget {
+class InfoPage extends StatefulWidget {
+  InfoPage({Key key}) : super(key: key);
+
+  @override
+  _InfoPage createState() => new _InfoPage();
+}
+
+class _InfoPage extends State<InfoPage> {
+
+  String appName = "";
+  String version = "";
+  String buildNumber = "";
+
+  _InfoPage() {
+    PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
+      setState(() {
+        appName = packageInfo.appName;
+        version = packageInfo.version;
+        buildNumber = packageInfo.buildNumber;
+      });
+    });
+  }
 
   _launchURL(String url) async {
     if (await canLaunch(url)) {
@@ -24,6 +46,9 @@ class InfoPage extends StatelessWidget {
                 RaisedButton(child: Text("Local Maps on Trailforks"), onPressed: () { _launchURL("https://www.trailforks.com/region/sault-ste-marie/"); }),
                 RaisedButton(child: Text("Local Maps on MTBProject"), onPressed: () { _launchURL("https://www.mtbproject.com/directory/8006724/sault-ste-marie"); }),
                 RaisedButton(child: Text("Send App Feedback"), onPressed: () { _launchURL("mailto:info@saultcyclingclub.ca?subject=Feedback on the Companion App"); }),
+                Center(
+                  child: Text("Application Version: $version"),
+                )
               ],
             ),
           )
