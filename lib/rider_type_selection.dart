@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 
 class RiderTypeSelection extends StatelessWidget {
-  final String JoinOurClubURL = "https://saultcyclingclub.ca/about-sault-cycling/join-our-club/";
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Who are you?"),
-      ),
       body: new Center(
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
