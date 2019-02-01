@@ -13,9 +13,9 @@ class _RideLeaderChecklist extends State<RideLeaderChecklist> {
 
   _RideLeaderChecklist() {
     _checkList = new Map<String,bool>();
-    _checkList["Item 1"] = false;
-    _checkList["Item 2"] = false;
-    _checkList["Item 3"] = false;
+    _checkList["Introduce yourself"] = false;
+    _checkList["Confirm Memberships"] = false;
+    _checkList["Outline route and expectations"] = false;
   }
 
   void _toggleChecklist(String k) {
@@ -39,14 +39,13 @@ class _RideLeaderChecklist extends State<RideLeaderChecklist> {
     });
 
     return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Ride Leader Checklist"),
-      ),
       body: new Center(
-        child: new Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: checkListBody,
-        ),
+        child: Padding(
+          padding: EdgeInsets.all(20.0),
+          child: new Column(
+            children: checkListBody,
+          ),
+        )
       ),
     );
   }

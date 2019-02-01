@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_scc_app/ride_leader.dart';
 import 'package:flutter_scc_app/ride_leader_checklist.dart';
 import 'package:flutter_scc_app/rider_checklist.dart';
 import 'package:flutter_scc_app/rider_type_selection.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder> {
         '/rideLeader': (BuildContext context) => new RideTypeSelection(rideLeader: true),
         '/rider': (BuildContext context) => new RideTypeSelection(rideLeader: false),
-        '/rideLeader/road': (BuildContext context) => new RideLeaderChecklist(),
+        '/rideLeader/road': (BuildContext context) => new RideLeaderSection(),
         '/rideLeader/mountain': (BuildContext context) => new RideLeaderChecklist(),
         '/rideLeader/tour': (BuildContext context) => new RideLeaderChecklist(),
         '/rider/road': (BuildContext context) => new RiderChecklist(),
