@@ -37,5 +37,9 @@ gcloud config set project scc-companion-app
 * `flutter packages pub run flutter_launcher_icons:main`
 * See [flutter_launcher_icons](https://pub.dartlang.org/packages/flutter_launcher_icons) for more details
 
+#### Development Firebase Authorization
+
+To authorize against firebase, you must add your SHA1/SHA256 key fingerprints under the app settings, the release key's fingerprints have already been added but if developing locally you must add your local development key fingerprint. Collect the key as [described here](https://developers.google.com/android/guides/client-auth), and add it to the [Firebase dashboard](https://console.firebase.google.com/u/1/project/scc-companion-app/settings/general/android:ca.saultcyclingclug.fluttersccapp) for this app
+
 #### Release Management
 Releases can be managed at the [Google Play Publisher Dashboard](https://play.google.com/apps/publish)

@@ -17,6 +17,9 @@ dependencies:
   cloud_firestore: ^0.8.2+3
   firebase_auth: ^0.7.0
 
+  # Required by firebase_auth, but we'd be using it anyways
+  google_sign_in: ^4.0.0
+
   # Used on the info page to provide application information
   package_info: ^0.4.0
 

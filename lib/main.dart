@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_scc_app/become_leader.dart';
 import 'package:flutter_scc_app/main_screen.dart';
-import 'package:flutter_scc_app/ride_leader.dart';
 import 'package:flutter_scc_app/rider_checklist.dart';
 import 'package:flutter_scc_app/rider_type_selection.dart';
 
@@ -18,11 +18,9 @@ class MyApp extends StatelessWidget {
       ),
       home: new MainScreen(),
       routes: <String, WidgetBuilder> {
-        '/rideLeader': (BuildContext context) => new RideTypeSelection(rideLeader: true),
+        // '/rideLeader': (BuildContext context) => new RideLeaderSection(), // Needs currently authed user to be passed in
+        '/rideLeaderDenied': (BuildContext context) => new BecomeARideLeader(),
         '/rider': (BuildContext context) => new RideTypeSelection(rideLeader: false),
-        '/rideLeader/road': (BuildContext context) => new RideLeaderSection(),
-        '/rideLeader/mountain': (BuildContext context) => new RideLeaderSection(),
-        '/rideLeader/tour': (BuildContext context) => new RideLeaderSection(),
         '/rider/road': (BuildContext context) => new RiderChecklist(),
         '/rider/mountain': (BuildContext context) => new RiderChecklist(),
         '/rider/tour': (BuildContext context) => new RiderChecklist(),
