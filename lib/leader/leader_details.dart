@@ -17,13 +17,16 @@ class RideLeaderDetails extends StatefulWidget {
 class _RideLeaderDetails extends State<RideLeaderDetails> {
   final FirebaseUser _user;
   final DocumentReference _ride;
+  Stream<DocumentSnapshot> rideStream;
 
-  _RideLeaderDetails(FirebaseUser user, DocumentReference ride) : _user = user, _ride = ride;
+  _RideLeaderDetails(FirebaseUser user, DocumentReference ride) : _user = user, _ride = ride {
+    rideStream = _ride.get().asStream();
+  }
 
   @override
   Widget build(BuildContext context) {
     return new StreamBuilder<DocumentSnapshot>(
-        stream: _ride.get().asStream(),
+        stream: rideStream,
         builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           return new Scaffold(
             body: new Center(
