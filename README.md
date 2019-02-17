@@ -21,11 +21,13 @@ gcloud config set project scc-companion-app
 * Build the application `flutter build apk --debug`
 
 #### Submit a cloud build of the application (Recommended)
+* Bump the version strings in android/app/src/build.gradle around line 37
 * Submit the project to Google Cloud Build where it will be built, signed, and stored in a Cloud Storage Bucket
 * `gcloud builds submit --config cloudbuild.yaml .`
 * Resulting signed APK will be in the [scc-build-output storage bucket](https://console.cloud.google.com/storage/browser/scc-build-output?project=scc-companion-app)
 
 #### Building the application locally for release
+* Bump the version strings in android/app/src/build.gradle around line 37
 * Decrypt the keystore and keystore properties
   * `gcloud kms decrypt --ciphertext-file=android/key.jks.enc --plaintext-file=android/key.jks --location=global --keyring=github-keyring --key=android-key`
   * `gcloud kms decrypt --ciphertext-file=android/keystore.properties.enc --plaintext-file=android/keystore.properties --location=global --keyring=github-keyring --key=android-key`
