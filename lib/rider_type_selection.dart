@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_scc_app/leader/ride_leader.dart';
 import 'package:flutter_scc_app/auth.dart';
+import 'package:flutter_scc_app/leader/ride_list.dart';
 
 class RiderTypeSelection extends StatelessWidget {
   @override
@@ -21,7 +21,7 @@ class RiderTypeSelection extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => RideLeaderSection(user: user),
+                            builder: (context) => RideList(user: user),
                           ));
                     }
                   }, onError: (e) {
@@ -47,7 +47,7 @@ class RiderTypeSelection extends StatelessWidget {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => RideLeaderSection(user: user),
+                                          builder: (context) => RideList(user: user),
                                         ));
                                   });
                                 },
