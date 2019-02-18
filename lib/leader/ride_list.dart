@@ -10,13 +10,13 @@ class RideList extends StatefulWidget {
   RideList({Key key, @required this.user}) : super(key: key);
 
   @override
-  _RideList createState() => new _RideList(this.user);
+  _RideList createState() => new _RideList();
 }
 
 class _RideList extends State<RideList> {
-  final FirebaseUser user;
+  Stream<QuerySnapshot> queryStream = Firestore.instance.collection('ride').orderBy('date', descending: true).snapshots();
 
-  _RideList(this.user);
+  _RideList();
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class _RideList extends State<RideList> {
         FlatButton(child: Text("Create a new Ride"), onPressed: (){
           Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => CreateRide(user: this.user),
+                builder: (context) => CreateRide(user: widget.user),
               ));
         })
       ],
@@ -43,9 +43,9 @@ class _RideList extends State<RideList> {
   }
 
   Widget buildRideList(BuildContext context) {
-    Query q = Firestore.instance.collection('ride').orderBy('date', descending: true);
+
     return StreamBuilder<QuerySnapshot>(
-      stream: q.snapshots(),
+      stream: queryStream,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
           return new Text("Failed to load ride data: ${snapshot.error.toString()}");
@@ -61,7 +61,7 @@ class _RideList extends State<RideList> {
                   onTap: () {
                     Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => RideLeaderSection(user: user, ride: document.reference),
+                          builder: (context) => RideLeaderSection(user: widget.user, ride: document.reference),
                         ));
                   }
                 );

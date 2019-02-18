@@ -4,24 +4,27 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_scc_app/auth.dart';
 
 class RideLeaderDetails extends StatefulWidget {
-  final FirebaseUser _user;
-  final DocumentReference _ride;
+  final FirebaseUser user;
+  final DocumentReference ride;
 
-  RideLeaderDetails({Key key, @required FirebaseUser user, @required DocumentReference ride}) : _user = user, _ride = ride, super(key: key);
+  RideLeaderDetails({Key key, @required this.user, @required this.ride}) : super(key: key);
 
   @override
-  _RideLeaderDetails createState() => new _RideLeaderDetails(_user, _ride);
+  _RideLeaderDetails createState() => new _RideLeaderDetails();
 }
 
 
-class _RideLeaderDetails extends State<RideLeaderDetails> {
-  final FirebaseUser _user;
-  final DocumentReference _ride;
+class _RideLeaderDetails extends State<RideLeaderDetails> with AutomaticKeepAliveClientMixin {
   Stream<DocumentSnapshot> rideStream;
 
-  _RideLeaderDetails(FirebaseUser user, DocumentReference ride) : _user = user, _ride = ride {
-    rideStream = _ride.get().asStream();
+  @override
+  initState() {
+    super.initState();
+    this.rideStream = widget.ride.get().asStream();
   }
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,7 @@ class _RideLeaderDetails extends State<RideLeaderDetails> {
                   child: new Column(
                     children: [
                       buildRideWidget(snapshot),
-                      Text("Welcome ${_user.displayName}"),
+                      Text("Welcome ${widget.user.displayName}"),
                       RaisedButton(child: Text("Sign Out"), onPressed: () {
                         handleSignOut();
                         Navigator.of(context).pop();
