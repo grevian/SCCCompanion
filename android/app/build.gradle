@@ -12,6 +12,12 @@ if (keystorePropertiesFile.exists()) {
     keystorePropertiesFile.withReader('UTF-8') { reader ->
         keystoreProperties.load(reader)
     }
+} else {
+    // For debug builds, these need to be set but they aren't used.
+    keystoreProperties['keyAlias'] = "debug"
+    keystoreProperties['keyPassword'] = "debug"
+    keystoreProperties['storeFile'] = "debug"
+    keystoreProperties['storePassword'] = "debug"
 }
 
 def flutterRoot = localProperties.getProperty('flutter.sdk')
