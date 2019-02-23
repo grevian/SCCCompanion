@@ -20,10 +20,16 @@ steps:
   - --keyring=github-keyring
   - --key=android-key
 
+# Fetch the history of the repository, since it's used for versioning info in the app
+- name: gcr.io/cloud-builders/git
+  args: [fetch, --unshallow]
+
 # Make a release build of the APK
 - name: 'gcr.io/$PROJECT_ID/flutter'
   args: ['build', 'apk']
 
 # Ship the built APK to a cloud storage bucket
-- name: 'gcr.io/cloud-builders/gsutil'
-  args: ['cp', 'build/app/outputs/apk/release/app-release.apk', 'gs://scc-build-output/scc_companion_app_$BUILD_ID.apk']
+artifacts:
+  objects:
+    location: 'gs://scc-build-output/'
+    paths: ['build/app/outputs/apk/release/*.apk']
