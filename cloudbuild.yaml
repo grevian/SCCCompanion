@@ -21,8 +21,8 @@ steps:
   - --key=android-key
 
 # Fetch the history of the repository, since it's used for versioning info in the app
-- name: gcr.io/cloud-builders/git
-  args: [fetch, --unshallow]
+#- name: gcr.io/cloud-builders/git
+#  args: ['fetch', '--unshallow']
 
 # Make a release build of the APK
 - name: 'gcr.io/$PROJECT_ID/flutter'
