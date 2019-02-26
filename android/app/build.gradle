@@ -1,6 +1,8 @@
+/*
 plugins {
     id 'com.gladed.androidgitversion' version '0.4.9'
 }
+ */
 
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
@@ -45,8 +47,10 @@ android {
         targetSdkVersion 27
 
         // Bump the versionCode and versionName whenever you're cutting a release
-        versionName androidGitVersion.name()
-        versionCode androidGitVersion.code()
+        // versionName androidGitVersion.name()
+        // versionCode androidGitVersion.code()
+        versionCode 5
+        versionName "0.1.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -64,7 +68,7 @@ android {
     buildTypes {
         release {
             signingConfig signingConfigs.release
-            setProperty("archivesBaseName", "SCC-Companion-$versionName")
+            // setProperty("archivesBaseName", "SCC-Companion-$versionName")
         }
         debug {
             signingConfig signingConfigs.debug
