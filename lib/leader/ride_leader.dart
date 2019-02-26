@@ -6,44 +6,55 @@ import 'package:flutter_scc_app/leader/ride_leader_checklist.dart';
 import 'package:flutter_scc_app/rider_counter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class RideLeaderSection extends StatefulWidget {
-  final FirebaseUser _user;
-  final DocumentReference _ride;
+class RideLeaderData extends InheritedWidget {
+  final FirebaseUser user;
+  final DocumentReference ride;
 
-  RideLeaderSection({Key key, @required FirebaseUser user, @required DocumentReference ride}) : _user = user, _ride = ride, super(key: key);
+  RideLeaderData({
+    Key key,
+    @required this.user,
+    @required this.ride,
+    @required Widget child,
+  }) : super(key: key, child: child);
 
   @override
-  _RideLeaderSection createState() => new _RideLeaderSection(_user, _ride);
+  bool updateShouldNotify(RideLeaderData oldWidget) =>
+      oldWidget.ride != this.ride || oldWidget.user != this.user;
+
+  static RideLeaderData of(BuildContext context) =>
+      context.inheritFromWidgetOfExactType(RideLeaderData);
 }
 
+class RideLeaderSection extends StatelessWidget {
+  final FirebaseUser user;
+  final DocumentReference ride;
 
-class _RideLeaderSection extends State<RideLeaderSection> {
-  final FirebaseUser _user;
-  final DocumentReference _ride;
-
-  _RideLeaderSection(FirebaseUser user, DocumentReference ride) : _user = user, _ride = ride;
+  RideLeaderSection({@required this.user, @required this.ride});
 
   @override
   Widget build(BuildContext context) {
-    return new DefaultTabController(
-        length: 4,
-        child: Scaffold(
-            appBar: AppBar(
-              bottom: TabBar(tabs: [
-                Tab(icon: Icon(Icons.check)),
-                Tab(icon: Icon(Icons.person)),
-                Tab(icon: Icon(Icons.map)),
-                Tab(icon: Icon(Icons.details)),
-              ]),
-            ),
+    return new RideLeaderData(
+        user: this.user,
+        ride: this.ride,
+        child: new DefaultTabController(
+            length: 4,
+            child: Scaffold(
+              appBar: AppBar(
+                bottom: TabBar(tabs: [
+                  Tab(icon: Icon(Icons.check)),
+                  Tab(icon: Icon(Icons.person)),
+                  Tab(icon: Icon(Icons.map)),
+                  Tab(icon: Icon(Icons.details)),
+                ]),
+              ),
               body: TabBarView(
                 children: [
                   RideLeaderChecklist(),
                   RiderCounter(),
                   RideDescription(),
-                  RideLeaderDetails(user: _user, ride: _ride),
+                  RideLeaderDetails(),
                 ],
               ),
-        ));
+            )));
   }
 }
