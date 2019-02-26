@@ -19,7 +19,7 @@ if (keystorePropertiesFile.exists()) {
         keystoreProperties.load(reader)
     }
 } else {
-    // For debug builds, these need to be set but they aren't used.
+    // For debug builds, these need to be set but they aren 't used.
     keystoreProperties['keyAlias'] = "debug"
     keystoreProperties['keyPassword'] = "debug"
     keystoreProperties['storeFile'] = "debug"
@@ -68,7 +68,7 @@ android {
     buildTypes {
         release {
             signingConfig signingConfigs.release
-            // setProperty("archivesBaseName", "SCC-Companion-$versionName")
+            setProperty("archivesBaseName", "SCC-Companion-$versionName")
         }
         debug {
             signingConfig signingConfigs.debug
