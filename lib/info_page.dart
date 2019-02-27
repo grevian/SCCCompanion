@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:package_info/package_info.dart';
@@ -47,7 +48,7 @@ class _InfoPage extends State<InfoPage> {
                 RaisedButton(child: Text("Local Maps on MTBProject"), onPressed: () { _launchURL("https://www.mtbproject.com/directory/8006724/sault-ste-marie"); }),
                 RaisedButton(child: Text("Send App Feedback"), onPressed: () { _launchURL("mailto:info@saultcyclingclub.ca?subject=Feedback on the Companion App"); }),
                 Center(
-                  child: Text("Application Version: $version"),
+                  child: Text("Application Version: $version, Dart Version: ${Platform.version}"),
                 )
               ],
             ),
