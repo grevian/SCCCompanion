@@ -54,7 +54,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
-        setProperty("archivesBaseName", "SCC-Companion-${android.defaultConfig.versionName}")
+        setProperty("archivesBaseName", "SCC-Companion-${android.defaultConfig.versionName}.apk")
     }
 
     signingConfigs {
