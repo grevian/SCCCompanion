@@ -21,24 +21,32 @@ class _RideDescription extends State<RideDescription> {
     super.dispose();
   }
 
-  void _errorSaving() {
-
+  void _errorSaving(AsyncError e) {
+    print(e.toString());
   }
 
   DocumentReference getRideLeaderCommentReference(DocumentReference ride, String rideLeaderID) {
-    return Firestore.instance.collection('ride_comments').document("${ride.documentID}:$rideLeaderID");
+    return Firestore.instance.collection('ride').document(ride.documentID).collection("comments").document(rideLeaderID);
   }
 
   void _saveDescription(BuildContext context, String description) {
     final RideLeaderData data = RideLeaderData.of(context);
-    final DocumentReference rideLeaderComment = getRideLeaderCommentReference(data.ride, data.user.uid);
+    final DocumentReference rideLeaderComment = getRideLeaderCommentReference(
+        data.ride, data.user.uid);
 
     data.ride.get().then((DocumentSnapshot ride) async {
-      assert(ride.exists, "Attempting to add description to non-existent ride!");
+      assert(ride
+          .exists, "Attempting to add description to non-existent ride!");
       final WriteBatch batch = Firestore.instance.batch();
-      batch.setData(rideLeaderComment, {'ride': ride.documentID, 'rider': data.user.uid, 'date': DateTime.now(), 'value': formController.text});
+      batch.setData(rideLeaderComment, {
+        'rider': data.user.uid,
+        'date': DateTime.now(),
+        'value': formController.text
+      });
       await batch.commit();
-    }, onError: _errorSaving);
+    }, onError: (Object e) {
+      _errorSaving(e);
+    });
   }
 
   @override
