@@ -36,6 +36,7 @@ class _InfoPage extends State<InfoPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return new Scaffold(
       body: new Center(
           child: Padding(
@@ -46,9 +47,10 @@ class _InfoPage extends State<InfoPage> {
                 RaisedButton(child: Text("Join the Club"), onPressed: () { _launchURL("https://saultcyclingclub.ca/about-sault-cycling/join-our-club/"); }),
                 RaisedButton(child: Text("Local Maps on Trailforks"), onPressed: () { _launchURL("https://www.trailforks.com/region/sault-ste-marie/"); }),
                 RaisedButton(child: Text("Local Maps on MTBProject"), onPressed: () { _launchURL("https://www.mtbproject.com/directory/8006724/sault-ste-marie"); }),
+                RaisedButton(child: Text("View Privacy Policy"), onPressed: () { _launchURL("https://saultcyclingclub.ca/cycling-club-companion-app-privacy-policy/"); }),
                 RaisedButton(child: Text("Send App Feedback"), onPressed: () { _launchURL("mailto:info@saultcyclingclub.ca?subject=Feedback on the Companion App"); }),
                 Center(
-                  child: Text("Application Version: $version, Dart Version: ${Platform.version}"),
+                  child: Text("Application Version: $version, Dart Version: ${Platform.version}, Package Version: ${this.version}"),
                 )
               ],
             ),
