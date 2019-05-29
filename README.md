@@ -4,6 +4,12 @@ A flutter application for members, riders, and ride leaders
 
 This application provides helpful information for group rides, including pre-ride checklists for both riders and ride leaders, links to maps and other club resources, and tools to support ride leaders before, during, and after rides.
 
+![](./docs/1.png | width=100)
+![](./docs/2.png | width=100)
+![](./docs/3.png | width=100)
+![](./docs/4.png | width=100)
+![](./docs/5.png | width=100)
+
 ## Getting Started
 
 Available on the play store [here](https://play.google.com/store/apps/details?id=ca.saultcyclingclug.fluttersccapp) (If you're in the internal/alpha/beta groups, for now)
