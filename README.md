@@ -9,6 +9,8 @@ This application provides helpful information for group rides, including pre-rid
 ![](/docs/3.png)
 ![](/docs/4.png)
 ![](/docs/5.png)
+![](/docs/6.png)
+![](/docs/7.png)
 
 ## Getting Started
 
